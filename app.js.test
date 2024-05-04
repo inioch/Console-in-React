@@ -12,7 +12,7 @@ function App() {
 	else if (userAgent.indexOf("iOS") !== -1) os = "iOS";
 	else os = "Nieznany";
 
-	const workstation = "Operating system: " + os;
+	const workstation = "System operacyjny: " + os;
 
 	// utzymanie focus na input
 	const inputRef = useRef(null);
@@ -35,12 +35,11 @@ function App() {
 	const [inputValueList, setInputValueList] = useState([]);
 	// index wpisanych rzeczy
 	const [inputValueIndex, setInputValueIndex] = useState(-1);
-	// Wiadomość o nieznanej komendzie
-	const [errorMessage, setErrorMessage] = useState("");
+
+	
 
 	const handleChange = (event) => {
 		setInputValue(event.target.value);
-		setErrorMessage("");
 	};
 	// obsługa strzałek
 	const handleKeyDown = (event) => {
@@ -61,31 +60,20 @@ function App() {
 
 	const handleSubmit = (event) => {
 		event.preventDefault();
-		if (inputValue.trim() !== "") {
-			const suggestion = checkField(inputValue);
-			if (suggestion !== null) {
-				setInputValueList([...inputValueList, suggestion]);
-			} else {
-				setInputValueList([...inputValueList, inputValue]);
-				setErrorMessage("Unknown command. Type help, for more informations.");
-			}
-		}
+		checkField(inputValue);
+		setInputValueList([...inputValueList, inputValue]);
 		setInputValue("");
 	};
 	// sprawdzenie wartości
 	const checkField = (inputValue) => {
 		switch (inputValue.toLowerCase()) {
 			case "help":
-				return "date - display current date, time - display current time, clean - refresh the page";
-			case "clean":
-				window.location.reload();
+				return <p>Pomoc</p>;
 				break;
-			case "date":
-				return new Date().toLocaleDateString();
-			case "time":
-				return new Date().toLocaleTimeString();
+
 			default:
-				return null;
+				console.log("Unknown command. Type help, for more informations.");
+				break;
 		}
 	};
 
@@ -95,15 +83,13 @@ function App() {
 			className="App"
 			onSubmit={handleSubmit}>
 			<p>{workstation}</p>
-			<p className="pb">All rights reserved.</p>
+			<p>Wszelkie prawa zastrzeżone.</p>
 
-			{errorMessage && <p className="error">{errorMessage}</p>}
-
-			<div>
-				{inputValueList.map((item, index) => (
-					<p key={index}>{item}</p>
+			<ul>
+				{suggestions.map((suggestion, index) => (
+					<li key={index}>{suggestion}</li>
 				))}
-			</div>
+			</ul>
 
 			<input
 				type="text"
