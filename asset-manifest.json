@@ -1,0 +1,13 @@
+{
+  "files": {
+    "main.css": "/Console-in-React/static/css/main.3e41d3bf.css",
+    "main.js": "/Console-in-React/static/js/main.7187f7f9.js",
+    "index.html": "/Console-in-React/index.html",
+    "main.3e41d3bf.css.map": "/Console-in-React/static/css/main.3e41d3bf.css.map",
+    "main.7187f7f9.js.map": "/Console-in-React/static/js/main.7187f7f9.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.3e41d3bf.css",
+    "static/js/main.7187f7f9.js"
+  ]
+}
